@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // 注意哦，是 "@/*" 后面的 "/*" 不能少
+      "@/*": [
+        "src/*"
+      ]
+    },
     "target": "es5",
     "lib": [
       "dom",
