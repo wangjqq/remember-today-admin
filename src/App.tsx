@@ -1,13 +1,58 @@
-import React from 'react'
+import React, { startTransition } from 'react'
 import './App.css'
-import { Button } from 'antd'
-import { useRoutes } from 'react-router-dom'
+import { useNavigate, useRoutes } from 'react-router-dom'
 import routes from './routes'
+import { SettingOutlined, HomeOutlined } from '@ant-design/icons'
+import { Layout, Menu, MenuProps } from 'antd'
+type MenuItem = Required<MenuProps>['items'][number]
 
-function App() {
+const { Sider, Content } = Layout
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: 'group'
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem
+}
+const items: MenuProps['items'] = [
+  getItem('主页', '/Home', <HomeOutlined />),
+  getItem('系统', 'sub1', <SettingOutlined />, [
+    getItem('系统概览', '/SystemOverview'),
+    getItem('系统日志', '/SystemLog'),
+  ]),
+]
+
+const App: React.FC = () => {
   const elements = useRoutes(routes)
+  const navigate = useNavigate()
 
-  return <div className="App">{elements}</div>
+  const onClick: MenuProps['onClick'] = (e) => {
+    startTransition(() => {
+      navigate(e.key)
+    })
+  }
+
+  return (
+    <div className="App">
+      <Layout>
+        <Layout hasSider>
+          <Sider theme="light">
+            <Menu onClick={onClick} defaultSelectedKeys={['/Home']} mode="inline" items={items} />
+          </Sider>
+          <Content className="App-Content">{elements}</Content>
+        </Layout>
+      </Layout>
+    </div>
+  )
 }
 
 export default App

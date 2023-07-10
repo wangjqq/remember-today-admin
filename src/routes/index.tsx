@@ -1,20 +1,27 @@
 import { Navigate } from 'react-router-dom'
-import Login from '@/view/Login'
-import Index from '@/view/Index'
+import { lazy } from 'react'
 
-const routes = [
+const routerItems = [
   {
     path: '/',
-    element: <Navigate to="/Index" />,
-  },
-  {
-    path: '/Index',
-    element: <Index />,
+    element: <Navigate to="/Home" />,
   },
   {
     path: '/Login',
-    element: <Login />,
+    Component: lazy(() => import('@/view/Login')),
+  },
+  {
+    path: '/Home',
+    Component: lazy(() => import('@/view/Home')),
+  },
+  {
+    path: '/SystemLog',
+    Component: lazy(() => import('@/view/System/SystemLog')),
+  },
+  {
+    path: '/SystemOverview',
+    Component: lazy(() => import('@/view/System/SystemOverview')),
   },
 ]
 
-export default routes
+export default routerItems
