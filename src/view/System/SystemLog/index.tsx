@@ -138,6 +138,7 @@ const SystemLog: React.FC = () => {
         columns={columns}
         scroll={{ y: 700 }}
         rowKey="id"
+        bordered
         {...tableProps}
         pagination={{ ...tableProps.pagination, showQuickJumper: true, showSizeChanger: true }}
       />

@@ -1,8 +1,8 @@
-import React, { startTransition } from 'react'
+import React, { startTransition, useEffect, useState } from 'react'
 import './App.css'
-import { useNavigate, useRoutes } from 'react-router-dom'
+import { useLocation, useNavigate, useRoutes } from 'react-router-dom'
 import routes from './routes'
-import { SettingOutlined, HomeOutlined } from '@ant-design/icons'
+import { SettingOutlined, HomeOutlined, ContainerOutlined } from '@ant-design/icons'
 import { Layout, Menu, MenuProps } from 'antd'
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -34,6 +34,12 @@ const items: MenuProps['items'] = [
 const App: React.FC = () => {
   const elements = useRoutes(routes)
   const navigate = useNavigate()
+  const location = useLocation()
+  const [selectedKeys, setSelectedKeys] = useState('/Home')
+
+  useEffect(() => {
+    setSelectedKeys(location.pathname)
+  }, [])
 
   const onClick: MenuProps['onClick'] = (e) => {
     startTransition(() => {
@@ -46,7 +52,13 @@ const App: React.FC = () => {
       <Layout>
         <Layout hasSider>
           <Sider theme="light">
-            <Menu onClick={onClick} defaultSelectedKeys={['/Home']} mode="inline" items={items} />
+            <Menu
+              onClick={onClick}
+              defaultSelectedKeys={['/Home']}
+              selectedKeys={[selectedKeys]}
+              mode="inline"
+              items={items}
+            />
           </Sider>
           <Content className="App-Content">{elements}</Content>
         </Layout>

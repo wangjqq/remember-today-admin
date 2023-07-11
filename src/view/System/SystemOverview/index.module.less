@@ -5,10 +5,25 @@ h1 {
 }
 .overview {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  height: calc(100%-70px);
+  height: 400px;
   .overview-items {
     width: 50%;
-    height: 50%;
+    height: 100%;
+  }
+}
+.info_list {
+  margin-bottom: 20px;
+}
+:global {
+  .ant-descriptions-item-label {
+    width: 150px;
+    padding: 16px 0 !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+  .ant-descriptions-item-content {
+    width: 200px;
   }
 }
