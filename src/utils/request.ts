@@ -24,8 +24,6 @@ axios.interceptors.response.use(
     const { data } = response
     if (data.code === '200') {
       return Promise.resolve(data)
-    } else if (data.code === '401') {
-      return Promise.reject(response)
     }
     return Promise.reject(response)
   },

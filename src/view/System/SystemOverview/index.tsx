@@ -16,7 +16,6 @@ const SystemOverview: React.FC = () => {
   }, [])
 
   const initEcharts = (data: any, num: number) => {
-    console.log(document.getElementById('one'))
     let myChart1 = echarts.init(document.getElementById('one') as HTMLElement)
     let myChart2 = echarts.init(document.getElementById('two') as HTMLElement)
     myChart1.setOption({

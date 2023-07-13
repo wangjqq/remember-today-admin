@@ -27,7 +27,7 @@ const items: MenuProps['items'] = [
   getItem('主页', '/Home', <HomeOutlined />),
   getItem('系统', 'sub1', <SettingOutlined />, [
     getItem('系统概览', '/SystemOverview'),
-    getItem('系统日志', '/SystemLog'),
+    getItem('日志记录', '/SystemLog'),
   ]),
 ]
 
@@ -52,13 +52,7 @@ const App: React.FC = () => {
       <Layout>
         <Layout hasSider>
           <Sider theme="light">
-            <Menu
-              onClick={onClick}
-              defaultSelectedKeys={['/Home']}
-              selectedKeys={[selectedKeys]}
-              mode="inline"
-              items={items}
-            />
+            <Menu onClick={onClick} defaultSelectedKeys={['/Home']} mode="inline" items={items} />
           </Sider>
           <Content className="App-Content">{elements}</Content>
         </Layout>

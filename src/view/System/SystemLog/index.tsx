@@ -1,6 +1,6 @@
 import { getLog } from '@/service/system'
-import { Button, Col, DatePicker, Form, Input, Row, Select, Table } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button, DatePicker, Form, Input, Select, Table } from 'antd'
+import React from 'react'
 import { useAntdTable } from 'ahooks'
 import dayjs, { Dayjs } from 'dayjs'
 import styles from './index.module.less'
@@ -49,12 +49,6 @@ const SystemLog: React.FC = () => {
       dataIndex: 'info',
     },
     {
-      title: '详细时间',
-      dataIndex: 'detail_time',
-      width: 200,
-      align: 'center',
-    },
-    {
       title: '类别',
       dataIndex: 'category',
       width: 100,
@@ -67,10 +61,14 @@ const SystemLog: React.FC = () => {
       align: 'center',
     },
     {
-      title: '日期',
-      dataIndex: 'time',
-      width: 150,
+      title: '时间',
+      dataIndex: 'timestamp',
+      width: 200,
       align: 'center',
+      render: (value, record, index) => {
+        let date1: any = new Date(Number(value))
+        return <span>{date1.toLocaleString()}</span>
+      },
     },
     {
       title: '用户id',
@@ -117,7 +115,7 @@ const SystemLog: React.FC = () => {
             <Option value="FATAL">FATAL</Option>
           </Select>
         </Form.Item>
-        <Form.Item name="time" initialValue="" label="日期">
+        <Form.Item name="timestamp" initialValue="" label="日期">
           <MyDatePicker />
         </Form.Item>
         <Form.Item name="name" initialValue="" label="用户名" style={{ marginLeft: '15px' }}>
@@ -130,7 +128,6 @@ const SystemLog: React.FC = () => {
       </Form>
     </div>
   )
-  console.log(tableProps)
   return (
     <div className={styles['log']}>
       {searchForm}
